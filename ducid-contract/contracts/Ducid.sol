@@ -117,4 +117,20 @@ contract Ducid {
 
         studentData[studentId][dataType] = data;
     }
+
+    //Authority auth functions - verifing and giving access to college by authority
+    function approveCollege(string calldata collegeId) external ownerOnly {
+        if(collegeVerificationStatus[collegeId] == CollegeStatus.ECS_notfound) revert CollegeNotFound();
+        if(collegeVerificationStatus[collegeId] == CollegeStatus.ECS_verified) revert CollegeAlreadyVerified();
+
+        collegeVerificationStatus[collegeId] = CollegeStatus.ECS_verified;
+    }
+
+    function rejectCollege(string calldata collegeId) external ownerOnly {
+        if(collegeVerificationStatus[collegeId] == CollegeStatus.ECS_notfound) revert CollegeNotFound();
+        if(collegeVerificationStatus[collegeId] == CollegeStatus.ECS_rejected) revert CollegeAlreadyrejected();
+
+        collegeVerificationStatus[collegeId] = CollegeStatus.ECS_rejected;
+    }
+    
 }
