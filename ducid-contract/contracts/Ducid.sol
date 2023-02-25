@@ -65,5 +65,114 @@ contract Ducid {
     //thirdparty access variables
     mapping (address => mapping(string => mapping (string => bool))) thirdPartyAccess;                            //thirdPartyAddress => (studentId => (dataType => access))
 
+    //modifiers
+    modifier ownerOnly() {
+        if(msg.sender != owner) revert AccessOnlyToOwner();
+        _;
+    }
+
+    modifier collegeOnly() {
+        string memory collegeId = colleges[msg.sender];
+        if(collegeVerificationStatus[collegeId] == CollegeStatus.ECS_notfound) revert AccessOnlyToACollege();
+        if(collegeVerificationStatus[collegeId] != CollegeStatus.ECS_verified) revert AccessOnlyToVerifiedCollege();
+        _;
+    }
+
+    modifier studentOnly() {
+        string memory studentId = students[msg.sender];
+        if(studentVerificationStatus[studentId] == StudentStatus.ESS_notfound) revert StudentNotFound();
+        _;
+    }
+
+    modifier ownCollegeStudent(string calldata studentId) {
+        if(studentVerificationStatus[studentId] == StudentStatus.ESS_notfound) revert StudentNotFound();
+
+        string memory collegeId = colleges[msg.sender];
+        string memory studentCollegeId = studentData[studentId]["College Id"];
+        if(keccak256(abi.encodePacked(collegeId)) != keccak256(abi.encodePacked(studentCollegeId))) revert studentIsOfAnotherCollege();
+        _;
+    }
+
+    //constructor
+    constructor() {
+        owner = msg.sender;
+    }
+
+    //private and hepler function
+    //data editing functions
+    function editCollegeData(string memory collegeId, string memory dataType, string memory data) private {
+        bytes memory _collegeData = bytes(collegeData[collegeId][dataType]);
+
+        if(_collegeData.length == 0)
+            collegeDataTypes[collegeId].push(dataType);
+
+        collegeData[collegeId][dataType] = data;
+    }
+
+    function editStudentData(string memory studentId, string memory dataType, string memory data) private {
+        bytes memory _studentData = bytes(studentData[studentId][dataType]);
+
+        if(_studentData.length == 0)
+            studentDataTypes[studentId].push(dataType);
+
+        studentData[studentId][dataType] = data;
+    }
+
+    //Authority auth functions - verifing and giving access to college by authority
+    function approveCollege(string calldata collegeId) external ownerOnly {
+        if(collegeVerificationStatus[collegeId] == CollegeStatus.ECS_notfound) revert CollegeNotFound();
+        if(collegeVerificationStatus[collegeId] == CollegeStatus.ECS_verified) revert CollegeAlreadyVerified();
+
+        collegeVerificationStatus[collegeId] = CollegeStatus.ECS_verified;
+    }
+
+    function rejectCollege(string calldata collegeId) external ownerOnly {
+        if(collegeVerificationStatus[collegeId] == CollegeStatus.ECS_notfound) revert CollegeNotFound();
+        if(collegeVerificationStatus[collegeId] == CollegeStatus.ECS_rejected) revert CollegeAlreadyrejected();
+
+        collegeVerificationStatus[collegeId] = CollegeStatus.ECS_rejected;
+    }
+
+    //college functions
+    function addAsCollege(string calldata collegeName) external {
+        string memory collegeId = generateId(msg.sender);
+
+        colleges[msg.sender] = collegeId;
+        collegeIds.push(collegeId);
+        collegeVerificationStatus[collegeId] = CollegeStatus.ECS_pending;
+
+        editCollegeData(collegeId, "College Name", collegeName);
+    }
+
+    //college data functions
+    function editOwnCollegeData(string calldata dataType, string calldata data) external collegeOnly {
+        bytes memory _data = bytes(data);
+        if(_data.length == 0) revert EmptyDataNotAllowed();
+
+        string memory collegeId = colleges[msg.sender];
+        editCollegeData(collegeId, dataType, data);
+    }
+
+    function editStudentDataAsCollege(string calldata studentId, string[] calldata dataTypes, string[] calldata data) external collegeOnly ownCollegeStudent(studentId) {
+        if(dataTypes.length != data.length) revert DataMissMatching();
+
+        for(uint i = 0; i < dataTypes.length; i++)
+        {
+            bytes memory _data = bytes(data[i]);
+            if(_data.length == 0) revert EmptyDataNotAllowed();
+
+            editStudentData(studentId, dataTypes[i], data[i]);
+        }
+    }
+
+    function editStudentDataAccessPermission(string calldata studentId, string calldata dataType, bool access) external collegeOnly ownCollegeStudent(studentId) {
+        studentDataEditAcess[studentId][dataType] = access;
+    }
+
+    function verifyStudentData(string calldata studentId, string calldata dataType) external collegeOnly ownCollegeStudent(studentId) {
+        studentDataVerificationStatus[studentId][dataType] = StudentDataStatus.EDS_verified;
+        studentData[studentId][dataType] = studentPendingData[studentId][dataType];
+    }
+
     
 }
