@@ -1,0 +1,25 @@
+.verified-college-heading {
+    padding-top: 2rem;
+    color: rgb(9, 5, 5);
+}
+.verified-college-section-body {
+    height: 100vh;
+}
+table {
+    width: 85%;
+    margin: 0 2rem;
+
+    border-color: black;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+.verified-college-addstudent-btn {
+    display: flex;
+    justify-content: right;
+    margin: 0 5rem 2rem 0;
+}
