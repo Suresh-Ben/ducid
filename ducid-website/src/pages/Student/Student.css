@@ -1,0 +1,10 @@
+.student-tab-changer {
+    margin: 1rem 5.5rem;
+    display: flex;
+    justify-content: right;
+}
+
+.student-tabs {
+    display: flex;
+    justify-content: center;
+}

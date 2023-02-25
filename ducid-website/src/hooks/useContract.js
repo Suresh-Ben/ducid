@@ -13,7 +13,6 @@ function useContract() {
         let provider = await new ethers.providers.Web3Provider(window.ethereum);
 
         if (provider) {
-            console.log(provider);
             await provider.send("eth_requestAccounts", []);
             const signer = await provider.getSigner();
             const accountAddress = await signer.getAddress();
