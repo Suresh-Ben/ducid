@@ -132,5 +132,47 @@ contract Ducid {
 
         collegeVerificationStatus[collegeId] = CollegeStatus.ECS_rejected;
     }
+
+    //college functions
+    function addAsCollege(string calldata collegeName) external {
+        string memory collegeId = generateId(msg.sender);
+
+        colleges[msg.sender] = collegeId;
+        collegeIds.push(collegeId);
+        collegeVerificationStatus[collegeId] = CollegeStatus.ECS_pending;
+
+        editCollegeData(collegeId, "College Name", collegeName);
+    }
+
+    //college data functions
+    function editOwnCollegeData(string calldata dataType, string calldata data) external collegeOnly {
+        bytes memory _data = bytes(data);
+        if(_data.length == 0) revert EmptyDataNotAllowed();
+
+        string memory collegeId = colleges[msg.sender];
+        editCollegeData(collegeId, dataType, data);
+    }
+
+    function editStudentDataAsCollege(string calldata studentId, string[] calldata dataTypes, string[] calldata data) external collegeOnly ownCollegeStudent(studentId) {
+        if(dataTypes.length != data.length) revert DataMissMatching();
+
+        for(uint i = 0; i < dataTypes.length; i++)
+        {
+            bytes memory _data = bytes(data[i]);
+            if(_data.length == 0) revert EmptyDataNotAllowed();
+
+            editStudentData(studentId, dataTypes[i], data[i]);
+        }
+    }
+
+    function editStudentDataAccessPermission(string calldata studentId, string calldata dataType, bool access) external collegeOnly ownCollegeStudent(studentId) {
+        studentDataEditAcess[studentId][dataType] = access;
+    }
+
+    function verifyStudentData(string calldata studentId, string calldata dataType) external collegeOnly ownCollegeStudent(studentId) {
+        studentDataVerificationStatus[studentId][dataType] = StudentDataStatus.EDS_verified;
+        studentData[studentId][dataType] = studentPendingData[studentId][dataType];
+    }
+
     
 }
