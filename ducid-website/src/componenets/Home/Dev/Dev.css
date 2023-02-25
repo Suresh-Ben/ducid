@@ -1,0 +1,43 @@
+.developer-slide {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.developer-area {
+    width: 80%;
+    height: 90%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-style: solid;
+    border-color: white;
+    border-radius: 1px;
+}
+.developer-about {
+    height : 100%;
+    width: 44%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: justify;
+    text-justify: inter-word;
+}
+.developer-image {
+    height : 100%;
+    margin-left: 3rem;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.developer-image img {
+    height: 20rem;
+}

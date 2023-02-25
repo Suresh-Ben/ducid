@@ -1,0 +1,20 @@
+.about-logo {
+    width : 30vw;
+}
+
+.about-main {
+    display: flex;
+    margin: 3rem 5rem;
+}
+
+.about-ducid-main-section {
+    width : 50%;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-ducid-image-section {
+    height : 50%;
+    margin-right: 5rem;
+}

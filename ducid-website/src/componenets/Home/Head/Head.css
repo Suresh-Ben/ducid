@@ -1,0 +1,26 @@
+.home-head {
+    height: 100vh;
+    color: white;
+    background-image: url("../../../files/images/home_background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.home-head-main {
+    height: 90%;
+    display: flex;
+    justify-content: center;
+}
+
+.home-head-main-section {
+    height: 100%;
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-head-main-img-section {
+    height: 100%;
+    display: flex;
+}

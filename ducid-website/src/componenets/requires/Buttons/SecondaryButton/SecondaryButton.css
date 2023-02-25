@@ -1,0 +1,46 @@
+.secondary-button {
+    padding: 10px 25px;
+    border-radius: 1.5rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    background-image: linear-gradient(to top left, #20d3fe, #a235ff);
+    outline: none !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.secondary-button-hover {
+    z-index: 1;
+    color: white;
+}
+
+.secondary-button-hover:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    background: rgb(195, 238, 255);
+    border-radius: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.secondary-button-hover:hover {
+    color: rgb(0, 0, 0);
+}
+
+.secondary-button-hover:hover:after {
+    left: auto;
+    right: 0;
+    width: 100%;
+}
+
+.secondary-button-hover:active {
+    top: 2px;
+}
