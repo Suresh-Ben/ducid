@@ -2,17 +2,21 @@ import React from 'react';
 
 import './Verifier.css';
 
+import useContract from '../../hooks/useContract';
 import Navbar from '../../componenets/requires/Navbar';
 import Footer from '../../componenets/requires/Footer';
 
 import SimpleButton from '../../componenets/requires/Buttons/SimpleButton';
 import DataField from '../../componenets/requires/DataField';
+import ConnectionError from '../../componenets/requires/ConnectionError';
 
 function Verifier() {
+    const { address, contract, connectionError } = useContract();
     return (
         <div>
             <div style={{minHeight:'100vh'}}>
                 <div className='nav-back'> <Navbar/> </div>
+                <ConnectionError error={connectionError}/>
 
                 <div style={{margin:'1.5rem', display : 'flex', justifyContent: 'center'}}><div>
                     <p>Please enter student ducid:</p>

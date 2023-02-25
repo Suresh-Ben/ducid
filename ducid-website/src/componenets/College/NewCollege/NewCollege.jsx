@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 
 import './NewCollege.css';
+import useContract from '../../../hooks/useContract';
 import SimpleButton from '../../requires/Buttons/SimpleButton';
 import IdSection from "../../requires/IdSection";
 import Navbar from '../../requires/Navbar';
 import Footer from '../../requires/Footer';
+import ConnectionError from '../../requires/ConnectionError';
+
 function NewCollege() {
 
     const [ collegeId, setCollegeId ] = useState("");
+    const { address, contract, connectionError } = useContract();
 
     return (
         <div>
             <div className="nav-back"><Navbar/></div>
+            <ConnectionError error={connectionError}/>
 
             <div className="body new-college-section">
                 <form style={{display: "flex", justifyContent:'center'}} >

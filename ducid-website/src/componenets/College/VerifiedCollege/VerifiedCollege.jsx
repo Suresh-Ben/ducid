@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 
 import './VerifiedCollege.css';
+import useContract from '../../../hooks/useContract';
 import Navbar from '../../requires/Navbar';
 import Footer from '../../requires/Footer';
 import SimpleButton from "../../requires/Buttons/SimpleButton";
 import AddStudent from "./AddStudent";
-
+import ConnectionError from '../../requires/ConnectionError';
 function VerifiedCollege() {
 
     const [popup, setPopup] = useState(false);
+    const { address, contract, connectionError } = useContract();
 
     function togglePopup() {
         setPopup(!popup);
@@ -17,6 +19,7 @@ function VerifiedCollege() {
     return (
         <div>
             <div className="nav-back"><Navbar/></div>
+            <ConnectionError error={connectionError}/>
             <div className="verified-college-section-body">
             
              <h5 className="verified-college-heading"><center>Students of your College</center></h5>

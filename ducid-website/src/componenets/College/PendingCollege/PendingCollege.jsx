@@ -1,14 +1,18 @@
 import React from "react";
 
 import './PendingCollege.css';
+import useContract from '../../../hooks/useContract';
 import SimpleButton from '../../requires/Buttons/SimpleButton';
 import IdSection from "../../requires/IdSection";
 import Navbar from '../../requires/Navbar';
 import Footer from '../../requires/Footer';
+import ConnectionError from '../../requires/ConnectionError';
 function PendingCollege() {
+    const { address, contract, connectionError } = useContract();
     return (
         <div>
             <div className="nav-back"><Navbar/></div>
+            <ConnectionError error={connectionError}/>
             <div className="pending-college-body">
             <form style={{display: "flex", justifyContent:'center'}} >
                     <div style={{width : '75%'}} className="form-group">
