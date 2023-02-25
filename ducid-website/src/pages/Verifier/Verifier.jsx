@@ -16,7 +16,7 @@ function Verifier() {
         <div>
             <div style={{minHeight:'100vh'}}>
                 <div className='nav-back'> <Navbar/> </div>
-                <ConnectionError error={connectionError}/>
+                <ConnectionError error={contract ? '' : 'Metamask is not installed or having issue connecting...!!!'}/>
 
                 <div style={{margin:'1.5rem', display : 'flex', justifyContent: 'center'}}><div>
                     <p>Please enter student ducid:</p>

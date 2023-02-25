@@ -19,7 +19,7 @@ function VerifiedCollege() {
     return (
         <div>
             <div className="nav-back"><Navbar/></div>
-            <ConnectionError error={connectionError}/>
+            <ConnectionError error={contract ? '' : 'Metamask is not installed or having issue connecting...!!!'}/>
             <div className="verified-college-section-body">
             
              <h5 className="verified-college-heading"><center>Students of your College</center></h5>
