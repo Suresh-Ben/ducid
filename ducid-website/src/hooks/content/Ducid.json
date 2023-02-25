@@ -1,0 +1,504 @@
+{
+    "contractName": "Ducid",
+    "abi": [{
+            "inputs": [],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "inputs": [],
+            "name": "AccessOnlyToACollege",
+            "type": "error"
+        },
+        {
+            "inputs": [],
+            "name": "AccessOnlyToOwner",
+            "type": "error"
+        },
+        {
+            "inputs": [],
+            "name": "AccessOnlyToVerifiedCollege",
+            "type": "error"
+        },
+        {
+            "inputs": [],
+            "name": "CollegeAlreadyVerified",
+            "type": "error"
+        },
+        {
+            "inputs": [],
+            "name": "CollegeAlreadyrejected",
+            "type": "error"
+        },
+        {
+            "inputs": [],
+            "name": "CollegeNotFound",
+            "type": "error"
+        },
+        {
+            "inputs": [],
+            "name": "DataMissMatching",
+            "type": "error"
+        },
+        {
+            "inputs": [],
+            "name": "EmptyDataNotAllowed",
+            "type": "error"
+        },
+        {
+            "inputs": [],
+            "name": "NoAccessToEditData",
+            "type": "error"
+        },
+        {
+            "inputs": [],
+            "name": "StudentNotFound",
+            "type": "error"
+        },
+        {
+            "inputs": [],
+            "name": "studentIsOfAnotherCollege",
+            "type": "error"
+        },
+        {
+            "inputs": [{
+                "internalType": "string",
+                "name": "collegeName",
+                "type": "string"
+            }],
+            "name": "addAsCollege",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "address",
+                    "name": "studentAddress",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "studentName",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "studentAge",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "studentPercentage",
+                    "type": "string"
+                }
+            ],
+            "name": "addNewStudent",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                "internalType": "string",
+                "name": "collegeId",
+                "type": "string"
+            }],
+            "name": "approveCollege",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "address",
+                    "name": "thirdParty",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "studentId",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "dataType",
+                    "type": "string"
+                }
+            ],
+            "name": "checkAccessToThirdParty",
+            "outputs": [{
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "string",
+                    "name": "dataType",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "data",
+                    "type": "string"
+                }
+            ],
+            "name": "editOwnCollegeData",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "string",
+                    "name": "studentId",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "dataType",
+                    "type": "string"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "access",
+                    "type": "bool"
+                }
+            ],
+            "name": "editStudentDataAccessPermission",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "string",
+                    "name": "studentId",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string[]",
+                    "name": "dataTypes",
+                    "type": "string[]"
+                },
+                {
+                    "internalType": "string[]",
+                    "name": "data",
+                    "type": "string[]"
+                }
+            ],
+            "name": "editStudentDataAsCollege",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "string[]",
+                    "name": "dataTypes",
+                    "type": "string[]"
+                },
+                {
+                    "internalType": "string[]",
+                    "name": "data",
+                    "type": "string[]"
+                }
+            ],
+            "name": "editStudentDataAsStudent",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getAllCollegeIds",
+            "outputs": [{
+                "internalType": "string[]",
+                "name": "",
+                "type": "string[]"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "string",
+                    "name": "collegeId",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "dataType",
+                    "type": "string"
+                }
+            ],
+            "name": "getCollegeData",
+            "outputs": [{
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                "internalType": "string",
+                "name": "collegeId",
+                "type": "string"
+            }],
+            "name": "getCollegeDataTypes",
+            "outputs": [{
+                "internalType": "string[]",
+                "name": "",
+                "type": "string[]"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                "internalType": "string",
+                "name": "collegeId",
+                "type": "string"
+            }],
+            "name": "getCollegeStatus",
+            "outputs": [{
+                "internalType": "enum Ducid.CollegeStatus",
+                "name": "",
+                "type": "uint8"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getCollegeStudentIds",
+            "outputs": [{
+                "internalType": "string[]",
+                "name": "",
+                "type": "string[]"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getOwnCollegeId",
+            "outputs": [{
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getOwnStudentId",
+            "outputs": [{
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "getOwner",
+            "outputs": [{
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "string",
+                    "name": "studentId",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "dataType",
+                    "type": "string"
+                }
+            ],
+            "name": "getStudentData",
+            "outputs": [{
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "string",
+                    "name": "studentId",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "dataType",
+                    "type": "string"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "TypeOfData",
+                    "type": "bool"
+                }
+            ],
+            "name": "getStudentDataAsCollege",
+            "outputs": [{
+                "internalType": "string",
+                "name": "data",
+                "type": "string"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "string",
+                    "name": "studentId",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "dataType",
+                    "type": "string"
+                }
+            ],
+            "name": "getStudentDataStatus",
+            "outputs": [{
+                "internalType": "enum Ducid.StudentDataStatus",
+                "name": "",
+                "type": "uint8"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                "internalType": "string",
+                "name": "studentId",
+                "type": "string"
+            }],
+            "name": "getStudentDataTypes",
+            "outputs": [{
+                "internalType": "string[]",
+                "name": "",
+                "type": "string[]"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "string",
+                    "name": "studentId",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "dataType",
+                    "type": "string"
+                }
+            ],
+            "name": "getStudentEditAccess",
+            "outputs": [{
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                "internalType": "string",
+                "name": "studentId",
+                "type": "string"
+            }],
+            "name": "getStudentStatus",
+            "outputs": [{
+                "internalType": "enum Ducid.StudentStatus",
+                "name": "",
+                "type": "uint8"
+            }],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "address",
+                    "name": "thirdParty",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "dataType",
+                    "type": "string"
+                }
+            ],
+            "name": "giveAccessToThirdParty",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                "internalType": "string",
+                "name": "collegeId",
+                "type": "string"
+            }],
+            "name": "rejectCollege",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "address",
+                    "name": "thirdParty",
+                    "type": "address"
+                },
+                {
+                    "internalType": "string",
+                    "name": "dataType",
+                    "type": "string"
+                }
+            ],
+            "name": "revokeAccessToThirdParty",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "string",
+                    "name": "studentId",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "dataType",
+                    "type": "string"
+                }
+            ],
+            "name": "verifyStudentData",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ]
+}
