@@ -1,11 +1,16 @@
-import React from 'react';
+import React,{ useState } from 'react';
 
 import './Auth.css';
 
 import Navbar from '../../componenets/requires/Navbar';
 import Footer from '../../componenets/requires/Footer';
+import AuthPopup from '../../componenets/College/AuthPopup';
 
 function Auth() {
+  const [popup, setPopup] = useState(false);
+    function togglePopup() {
+        setPopup(!popup);
+    }
     return (
         <div>
             <div style={{minHeight : '100vh'}}>
@@ -20,6 +25,7 @@ function Auth() {
                               <th scope="col">College Name</th>
                               <th scope="col">College Id</th>
                               <th scope="col">Verification Status</th>
+                              <th scope="col"></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -28,6 +34,12 @@ function Auth() {
                               <td>Mark</td>
                               <td>Otto</td>
                               <td>@mdo</td>
+                              <td>
+                              <div className="authpopup-btn">
+                                  <button onClick={togglePopup}>Update Status</button>
+                                  <AuthPopup togglePopup={togglePopup} visibility={popup} />
+                              </div>
+                              </td>
                             </tr>
                           </tbody>
                         </table>

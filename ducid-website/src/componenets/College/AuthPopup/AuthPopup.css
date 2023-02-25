@@ -1,0 +1,15 @@
+.auth-popup {
+    position: fixed;
+    width: 50vw;
+    height: 50vh;
+    top: 0;
+    left: 0;
+
+    margin: 25vh 0 0 25vw;
+
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+
+    box-shadow: 0 0 100rem black;
+}
