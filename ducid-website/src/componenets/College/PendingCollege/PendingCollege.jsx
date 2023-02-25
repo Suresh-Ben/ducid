@@ -12,7 +12,7 @@ function PendingCollege() {
     return (
         <div>
             <div className="nav-back"><Navbar/></div>
-            <ConnectionError error={connectionError}/>
+            <ConnectionError error={contract ? '' : 'Metamask is not installed or having issue connecting...!!!'}/>
             <div className="pending-college-body">
             <form style={{display: "flex", justifyContent:'center'}} >
                     <div style={{width : '75%'}} className="form-group">
