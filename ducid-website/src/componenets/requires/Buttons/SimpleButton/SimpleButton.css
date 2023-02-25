@@ -1,0 +1,15 @@
+.simple-button {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    border-radius: 1.5rem;
+    padding: 10px 25px;
+    transition-duration: .4s;
+    font-weight: 640;
+    margin: 0 .7rem;
+}
+
+.simple-button:hover {
+    color: white;
+    background-color: black;
+}

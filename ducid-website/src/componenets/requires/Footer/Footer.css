@@ -1,0 +1,46 @@
+.footer {
+    background-color: black;
+    color: white;
+    padding: 2rem 5rem;
+}
+
+.footer-top {
+    margin-bottom: 3.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-logos-section {
+    width: 30%;
+    display: grid;
+}
+
+.footer-logos {
+    display: flex;
+    justify-content: center;
+}
+
+.footer-small-log {
+    height: 1.4rem;
+    margin: .5rem 0.35rem;
+}
+
+.footer-pages-links {
+    width: 65%;
+    display: flex;
+}
+
+.footer-pages-links div {
+    width: 20vw;
+}
+
+.footer-pages-links a {
+    text-decoration: none;
+    color: white;
+}
