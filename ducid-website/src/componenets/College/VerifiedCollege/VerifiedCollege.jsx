@@ -7,6 +7,7 @@ import Footer from '../../requires/Footer';
 import SimpleButton from "../../requires/Buttons/SimpleButton";
 import AddStudent from "./AddStudent";
 import ConnectionError from '../../requires/ConnectionError';
+import UpdateStudent from "./UpdateStudent";
 function VerifiedCollege() {
 
     const [popup, setPopup] = useState(false);
@@ -41,6 +42,10 @@ function VerifiedCollege() {
                                 <td>Student1</td>
                                 <td>ducid</td>
                                 <td>&#9989;</td>
+                                <td>
+                                    <button onClick={togglePopup} text={"Update Details"}></button>
+                                    <UpdateStudent togglePopup={togglePopup} visibility={popup} />
+                                </td>
                             </tr>
                             <tr>
                                 <td>Student2</td>
