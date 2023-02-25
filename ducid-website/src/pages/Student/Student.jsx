@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './Student.css';
 
@@ -15,6 +15,8 @@ function Student() {
     const { address, contract, connectionError } = useContract();
     const [ studentTab, setStudentTab ] = useState(false);
     const [ studentVerificationStatus, setStudentVerificationStatus ] = useState(true);
+    const [ studentId, setStudentId ] = useState("");
+    const [ studentDataTypes, setStudentDataTypes ] = useState([]);
     /**
      * @dev
      * false = dataTab
@@ -25,7 +27,21 @@ function Student() {
         setStudentTab(!studentTab);
     }
 
-    console.log(contract);
+    async function loadStudent() {
+        if(!contract) return;
+
+        let tempStudentId = await contract.getOwnStudentId();
+        setStudentId(tempStudentId);
+
+        let tempStudentDataTypes = await contract.getStudentDataTypes(tempStudentId);
+        setStudentDataTypes(tempStudentDataTypes);
+    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            loadStudent();
+        }, 1000); 
+    },[address, contract, studentId]);
 
     return (
         <div>
@@ -41,12 +57,16 @@ function Student() {
                     <div>
                         <div style={!studentVerificationStatus ? {display : 'none'} : {}}>
                             <div style={{width : '75%', margin:'0 10rem 2rem 10rem'}}>
-                                <IdSection/>
+                                <IdSection ducid={studentId}/>
                             </div>
                             <div className='student-tabs'>
                                 <div style={studentTab ? {display : 'none'} : {}} className='student-data-tab'>
-                                    <DataField data="This is data" dataType="dataType" changable={true} />
-                                    <DataField data="This is data" dataType="dataType" changable={true} />
+                                    {
+                                        studentDataTypes.map(async (type) => {
+                                            let data = await contract.getStudentData(studentId, type);
+                                            return <DataField key={type} data={data} dataType={type} changable={true} />
+                                        })
+                                    }
 
                                     <div style={{display:'flex', justifyContent:'center'}} ><SimpleButton text="Update data" /></div>
                                 </div>

@@ -7,10 +7,11 @@ import Footer from '../../requires/Footer';
 import SimpleButton from "../../requires/Buttons/SimpleButton";
 import AddStudent from "./AddStudent";
 import ConnectionError from '../../requires/ConnectionError';
-function VerifiedCollege() {
+function VerifiedCollege(props) {
 
-    const [popup, setPopup] = useState(false);
+    const collegeId = props.collegeId;
     const { address, contract, connectionError } = useContract();
+    const [popup, setPopup] = useState(false);
 
     function togglePopup() {
         setPopup(!popup);
@@ -25,7 +26,7 @@ function VerifiedCollege() {
              <h5 className="verified-college-heading"><center>Students of your College</center></h5>
                 <div className="verified-college-addstudent-btn">
                         <SimpleButton onClick={togglePopup} text={"Add Student"}/>
-                        <AddStudent togglePopup={togglePopup} visibility={popup} />
+                        <AddStudent contract={contract} togglePopup={togglePopup} visibility={popup} />
                 </div>
                 <div style={{display:"flex", justifyContent:'center'}}>
                     <table  className="verified-college-table">

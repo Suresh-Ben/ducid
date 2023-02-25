@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\suresh\\Documents\\Hackmol\\ducid\\ducid-contract\\contracts\\Ducid.sol": {
-      "lastModificationDate": 1677308759800,
-      "contentHash": "381a3f83ad3d9453da8bc4a7f8ec2b50",
+      "lastModificationDate": 1677366141907,
+      "contentHash": "0c7c51dcb86f30259861144bb21a4e9b",
       "sourceName": "contracts/Ducid.sol",
       "solcConfig": {
         "version": "0.8.17",

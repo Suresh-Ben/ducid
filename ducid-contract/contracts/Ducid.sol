@@ -257,7 +257,7 @@ contract Ducid {
     function getCollegeStatus(string calldata collegeId) view external returns(CollegeStatus) {   return collegeVerificationStatus[collegeId];   }
     function getStudentStatus(string calldata studentId) view external returns(StudentStatus) {   return studentVerificationStatus[studentId];   }
 
-    function getCollegeDataTypes(string calldata collegeId) view external returns(string[] memory) {    return collegeDataTypes[collegeId];    }
+    //imp function getCollegeDataTypes(string calldata collegeId) view external returns(string[] memory) {    return collegeDataTypes[collegeId];    }
     function getStudentDataTypes(string calldata studentId) view external returns(string[] memory) {    return studentDataTypes[studentId];    }
 
     function getStudentEditAccess(string memory studentId, string memory dataType) view external returns(bool) {    return studentDataEditAcess[studentId][dataType];   }
@@ -268,7 +268,7 @@ contract Ducid {
     function getCollegeData(string calldata collegeId, string calldata dataType) view external returns(string memory) {  return collegeData[collegeId][dataType];  }
     function getStudentData(string calldata studentId, string calldata dataType) view external returns(string memory) {
         if(studentVerificationStatus[studentId] == StudentStatus.ESS_notfound) revert StudentNotFound();
-        if(!thirdPartyAccess[msg.sender][studentId][dataType]) revert NoAccessToEditData();
+        if(keccak256(abi.encodePacked(students[msg.sender])) == keccak256(abi.encodePacked(studentId)) || !thirdPartyAccess[msg.sender][studentId][dataType]) revert NoAccessToEditData();
 
         return studentData[studentId][dataType];
     }

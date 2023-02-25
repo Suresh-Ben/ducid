@@ -18,7 +18,7 @@ function useContract() {
             const accountAddress = await signer.getAddress();
             SetAddress(accountAddress);
 
-            const contractAddress = "0xfC71201842E128866e00B536C5C4d470D4e15869";
+            const contractAddress = "0x27dbd024E6AF74479f0315972a759f8b2b1EcC49";
             let DucidContract = await new ethers.Contract(
                 contractAddress,
                 Ducid.abi,
