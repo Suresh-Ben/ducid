@@ -9,6 +9,7 @@ import SimpleButton from '../../componenets/requires/Buttons/SimpleButton';
 import IdSection from '../../componenets/requires/IdSection';
 import DataField from '../../componenets/requires/DataField';
 import VerifingData from '../../componenets/Student/VerifingData';
+import ConnectionError from '../../componenets/requires/ConnectionError/ConnectionError';
 
 function Student() {
     const { address, contract, connectionError } = useContract();
@@ -28,6 +29,7 @@ function Student() {
         <div>
             <div style={{minHeight: '100vh'}}>
                 <div className='nav-back'> <Navbar/> </div>
+                <ConnectionError error={connectionError}/>
 
                 <div className='student-main-area'>
                     <div className='student-tab-changer'>
