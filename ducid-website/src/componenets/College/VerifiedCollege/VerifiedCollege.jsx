@@ -14,9 +14,13 @@ function VerifiedCollege(props) {
     const collegeId = props.collegeId;
     const { address, contract, connectionError } = useContract();
     const [popup, setPopup] = useState(false);
+    const [updatePopup, setupdatePopup] = useState(false);
 
     function togglePopup() {
         setPopup(!popup);
+    }
+    function updateTogglePopup() {
+        setupdatePopup(!updatePopup);
     }
 
     return (
@@ -45,8 +49,8 @@ function VerifiedCollege(props) {
                                 <td>ducid</td>
                                 <td>&#9989;</td>
                                 <td>
-                                    <button onClick={togglePopup} text={"Update Details"}></button>
-                                    <UpdateStudent togglePopup={togglePopup} visibility={popup} />
+                                    <button onClick={updateTogglePopup} text={"Update Details"}></button>
+                                    <UpdateStudent updateTogglePopup={updateTogglePopup} visibility={updatePopup} />
                                 </td>
                             </tr>
                             <tr>
