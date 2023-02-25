@@ -137,6 +137,10 @@ contract Ducid {
         studentData[studentId][dataType] = data;
     }
 
+    function editStudentDataAccess(string memory studentId, string calldata dataType, StudentDataStatus newDataStatus) private {
+        studentDataVerificationStatus[studentId][dataType] = newDataStatus;
+    }
+
     //Authority auth functions
     function approveCollege(string calldata collegeId) external ownerOnly {
         if(collegeVerificationStatus[collegeId] == CollegeStatus.ECS_notfound) revert CollegeNotFound();
@@ -189,8 +193,8 @@ contract Ducid {
     }
 
     function verifyStudentData(string calldata studentId, string calldata dataType) external collegeOnly ownCollegeStudent(studentId) {
-        studentDataVerificationStatus[studentId][dataType] = StudentDataStatus.EDS_verified;
-        studentData[studentId][dataType] = studentPendingData[studentId][dataType];
+            editStudentDataAccess(studentId, dataType, StudentDataStatus.EDS_verified);
+            editStudentData(studentId, dataType, studentPendingData[studentId][dataType]);
     }
 
     //college auth functions
@@ -218,7 +222,7 @@ contract Ducid {
         {
             if(!studentDataEditAcess[studentId][dataTypes[i]]) revert NoAccessToEditData();
             // editStudentData(studentId, dataType, data);
-            studentDataVerificationStatus[studentId][dataTypes[i]] = StudentDataStatus.EDS_pending;
+            editStudentDataAccess(studentId, dataTypes[i], StudentDataStatus.EDS_pending);
             studentPendingData[studentId][dataTypes[i]] = data[i];
         }
     }
@@ -276,10 +280,4 @@ contract Ducid {
             return studentPendingData[studentId][dataType];
     }
 
-
-    //withdraw functionality
-    // function withdraw() external ownerOnly {
-    //     (bool success, ) = owner.call{value : address(this).balance}("");
-    //     if(!success) revert WithdrawUnsuccessfull();
-    // }
 }
