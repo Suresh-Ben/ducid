@@ -25,11 +25,13 @@ function Student() {
         setStudentTab(!studentTab);
     }
 
+    console.log(contract);
+
     return (
         <div>
             <div style={{minHeight: '100vh'}}>
                 <div className='nav-back'> <Navbar/> </div>
-                <ConnectionError error={connectionError}/>
+                <ConnectionError error={contract ? '' : 'Metamask is not installed or having issue connecting...!!!'}/>
 
                 <div className='student-main-area'>
                     <div className='student-tab-changer'>

@@ -16,7 +16,7 @@ function NewCollege() {
     return (
         <div>
             <div className="nav-back"><Navbar/></div>
-            <ConnectionError error={connectionError}/>
+            <ConnectionError error={contract ? '' : 'Metamask is not installed or having issue connecting...!!!'}/>
 
             <div className="body new-college-section">
                 <form style={{display: "flex", justifyContent:'center'}} >
