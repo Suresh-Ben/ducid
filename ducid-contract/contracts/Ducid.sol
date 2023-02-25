@@ -93,5 +93,28 @@ contract Ducid {
         _;
     }
 
-    
+    //constructor
+    constructor() {
+        owner = msg.sender;
+    }
+
+    //private and hepler function
+    //data editing functions
+    function editCollegeData(string memory collegeId, string memory dataType, string memory data) private {
+        bytes memory _collegeData = bytes(collegeData[collegeId][dataType]);
+
+        if(_collegeData.length == 0)
+            collegeDataTypes[collegeId].push(dataType);
+
+        collegeData[collegeId][dataType] = data;
+    }
+
+    function editStudentData(string memory studentId, string memory dataType, string memory data) private {
+        bytes memory _studentData = bytes(studentData[studentId][dataType]);
+
+        if(_studentData.length == 0)
+            studentDataTypes[studentId].push(dataType);
+
+        studentData[studentId][dataType] = data;
+    }
 }
