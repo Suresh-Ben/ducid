@@ -1,0 +1,32 @@
+.popup {
+    position: fixed;
+    width: 50vw;
+    height: 80vh;
+    top: 0;
+    left: 0;
+
+    margin: 10vh 0 0 25vw;
+
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+
+    box-shadow: 0 0 100rem black;
+}
+
+.close-btn {
+    display: flex;
+    justify-content: right;
+    margin: .2rem .5rem;
+
+    cursor: pointer;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+}
+
+.student-add-data-input {
+    width: 20rem;
+}

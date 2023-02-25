@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 
 import './VerifiedCollege.css';
 import Navbar from '../../requires/Navbar';
 import Footer from '../../requires/Footer';
 import SimpleButton from "../../requires/Buttons/SimpleButton";
+import AddStudent from "./AddStudent";
 
 function VerifiedCollege() {
+
+    const [popup, setPopup] = useState(false);
+
+    function togglePopup() {
+        setPopup(!popup);
+    }
+
     return (
         <div>
             <div className="nav-back"><Navbar/></div>
             <div className="verified-college-section-body">
-                <h5 className="verified-college-heading"><center>Students of your College</center></h5>
-                <div className="verified-college-addstudent-btn"><SimpleButton text={"Add Student"}/></div>
+            
+             <h5 className="verified-college-heading"><center>Students of your College</center></h5>
+                <div className="verified-college-addstudent-btn">
+                        <SimpleButton onClick={togglePopup} text={"Add Student"}/>
+                        <AddStudent togglePopup={togglePopup} visibility={popup} />
+                </div>
                 <div style={{display:"flex", justifyContent:'center'}}>
                     <table  className="verified-college-table">
                         <tr className="verified-college-row">
