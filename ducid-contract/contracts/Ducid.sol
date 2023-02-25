@@ -65,5 +65,33 @@ contract Ducid {
     //thirdparty access variables
     mapping (address => mapping(string => mapping (string => bool))) thirdPartyAccess;                            //thirdPartyAddress => (studentId => (dataType => access))
 
+    //modifiers
+    modifier ownerOnly() {
+        if(msg.sender != owner) revert AccessOnlyToOwner();
+        _;
+    }
+
+    modifier collegeOnly() {
+        string memory collegeId = colleges[msg.sender];
+        if(collegeVerificationStatus[collegeId] == CollegeStatus.ECS_notfound) revert AccessOnlyToACollege();
+        if(collegeVerificationStatus[collegeId] != CollegeStatus.ECS_verified) revert AccessOnlyToVerifiedCollege();
+        _;
+    }
+
+    modifier studentOnly() {
+        string memory studentId = students[msg.sender];
+        if(studentVerificationStatus[studentId] == StudentStatus.ESS_notfound) revert StudentNotFound();
+        _;
+    }
+
+    modifier ownCollegeStudent(string calldata studentId) {
+        if(studentVerificationStatus[studentId] == StudentStatus.ESS_notfound) revert StudentNotFound();
+
+        string memory collegeId = colleges[msg.sender];
+        string memory studentCollegeId = studentData[studentId]["College Id"];
+        if(keccak256(abi.encodePacked(collegeId)) != keccak256(abi.encodePacked(studentCollegeId))) revert studentIsOfAnotherCollege();
+        _;
+    }
+
     
 }
