@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import './PendingCollege.css';
 import useContract from '../../../hooks/useContract';
@@ -7,7 +7,16 @@ import IdSection from "../../requires/IdSection";
 import Navbar from '../../requires/Navbar';
 import Footer from '../../requires/Footer';
 import ConnectionError from '../../requires/ConnectionError';
-function PendingCollege() {
+function PendingCollege(props) {
+
+    const [ collegeId, setCollegeId ] = useState(props.collegeId);
+
+    const { email, subject, body } = {
+        email : "sureshbennabatthula@gmail.com",
+        subject : "ducid - college verification",
+        body: "please verify our college at ducid : " + collegeId
+    };
+
     const { address, contract, connectionError } = useContract();
     return (
         <div>
@@ -20,8 +29,12 @@ function PendingCollege() {
                         <h5 style={{paddingTop : "1rem"}}><center>You can mail us to know the status of your verification.</center></h5>
                         <br />
                         <div>
-                            <IdSection purpose="college" ducid="this is ducid"/>
-                            <div style={{display:"flex", justifyContent:"center", marginTop: '1rem'}}><SimpleButton text = {"Mail"}/></div>
+                            <IdSection purpose="college" ducid={collegeId}/>
+                            <div style={{display:"flex", justifyContent:"center", marginTop: '1rem'}}>
+                                <a style={{borderStyle:'solid', borderWidth:'2px'}} href={`mailto:${email}?subject=${subject || ""}&body=${body || ""}`} type='button' className="simple-button">
+                                    Mail authority
+                                </a>
+                            </div>
                         </div>
                     </div>
             </form>

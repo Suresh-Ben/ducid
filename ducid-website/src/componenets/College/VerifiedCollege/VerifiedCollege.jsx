@@ -29,21 +29,25 @@ function VerifiedCollege() {
                 </div>
                 <div style={{display:"flex", justifyContent:'center'}}>
                     <table  className="verified-college-table">
-                        <tr className="verified-college-row">
+                        <thead className="verified-college-row">
+                            <tr>
                             <th>Student Name</th>
                             <th>ducid</th>
                             <th>Verification Status</th>
-                        </tr>
-                        <tr>
-                            <td>Student1</td>
-                            <td>ducid</td>
-                            <td>&#9989;</td>
-                        </tr>
-                        <tr>
-                            <td>Student2</td>
-                            <td>ducid</td>
-                            <td>&#x1F7E0;</td>
-                        </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Student1</td>
+                                <td>ducid</td>
+                                <td>&#9989;</td>
+                            </tr>
+                            <tr>
+                                <td>Student2</td>
+                                <td>ducid</td>
+                                <td>&#x1F7E0;</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>            
             </div>
