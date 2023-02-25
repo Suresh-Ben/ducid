@@ -58,7 +58,7 @@ contract Ducid {
     mapping (address => string) private students;                                               //studentAddress => studentId
     mapping (string => string[]) private studentIds;                                            //collegeId => allStudentIdsList of that college
     mapping (string => StudentStatus) studentVerificationStatus;                                 //studentId = college verification status
-    mapping (string => mapping(string => string)) private studentData;                          //studentId => (studentDataType => studentData) -- collegeName, collegeId and studentName are default data
+    mapping (string => mapping(string => string)) private studentData;                          //studentId => (studentDataType => studentData) -- collegeId, studentName, studentAge and studentPercentage are default data
     mapping (string => string[]) studentDataTypes;                                              //studentId => AllDatatypes of student data
     //student data access
     mapping (string => mapping(string => bool)) studentDataEditAcess;                           //studentId => (DataType => bool) -- says wether a data is editable a student or not
