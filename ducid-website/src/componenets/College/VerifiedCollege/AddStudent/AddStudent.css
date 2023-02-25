@@ -12,6 +12,7 @@
     border-width: 1px;
 
     box-shadow: 0 0 100rem black;
+    overflow-y: scroll;
 }
 
 .close-btn {
