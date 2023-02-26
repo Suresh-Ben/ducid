@@ -17,6 +17,11 @@ function Student() {
     const [ studentVerificationStatus, setStudentVerificationStatus ] = useState(true);
     const [ studentId, setStudentId ] = useState("");
     const [ studentDataTypes, setStudentDataTypes ] = useState([]);
+    const [ studentDatas, setStudentDatas ] = useState([]);
+
+    const [ thirdParty, setThirdParty ] = useState("");
+    const [ dataAccesses, setDataAccesses ] = useState({});
+    const [ verifClick, setverifClick ] = useState(false);
     /**
      * @dev
      * false = dataTab
@@ -35,13 +40,36 @@ function Student() {
 
         let tempStudentDataTypes = await contract.getStudentDataTypes(tempStudentId);
         setStudentDataTypes(tempStudentDataTypes);
+
+        let tempDataArray = [];
+        for(let i = 0; i < studentDataTypes.length; i++)
+        {
+            let data = await contract.getStudentData(studentId, studentDataTypes[i]);
+            tempDataArray.push({dataType: studentDataTypes[i], data: data});
+        }
+        setStudentDatas(tempDataArray);
     }
 
     useEffect(() => {
         setTimeout(() => {
             loadStudent();
         }, 1000); 
-    },[address, contract, studentId]);
+    },[address, contract, studentId, studentDataTypes]);
+
+    async function updateDataAccesses() {
+        setverifClick(!verifClick);
+        let dataTypes = [];
+        let dataaccessess = [];
+
+        for(const type in dataAccesses)
+        {
+            dataTypes.push(type);
+            dataaccessess.push(true);
+        }
+        console.log(thirdParty)
+        console.log(dataAccesses)
+        await contract.changeThirdPartyAccess(thirdParty, dataTypes, dataaccessess);
+    }
 
     return (
         <div>
@@ -62,25 +90,27 @@ function Student() {
                             <div className='student-tabs'>
                                 <div style={studentTab ? {display : 'none'} : {}} className='student-data-tab'>
                                     {
-                                        studentDataTypes.map(async (type) => {
-                                            let data = await contract.getStudentData(studentId, type);
-                                            return <DataField key={type} data={data} dataType={type} changable={true} />
+                                        studentDatas.map((Data) => {
+                                            return <DataField key={Data.dataType} dataType={Data.dataType} data={Data.data} />
                                         })
                                     }
 
-                                    <div style={{display:'flex', justifyContent:'center'}} ><SimpleButton text="Update data" /></div>
+                                    {/* <div style={{display:'flex', justifyContent:'center'}} ><SimpleButton text="Update data" /></div> */}
                                 </div>
 
                                 <div style={!studentTab ? {display : 'none'} : {}} className='student-verification-tab'>
                                     <div style={{display:'flex', justifyContent:'center'}} >Please enter the third party public address to share your data</div><br />
-                                    <input style={{width:'30rem'}} className='student-data' type="text" /> <SimpleButton text="Verify accessability"/>
+                                    <input value={thirdParty} onChange={(event) => {setThirdParty(event.target.value)}} style={{width:'30rem'}} className='student-data' type="text" /> <SimpleButton text="Verify accessability"/>
 
                                     <div style={{display:'grid', justifyContent:'center'}}>
-                                        <VerifingData/>
-                                        <VerifingData/>
+                                        {
+                                            studentDataTypes.map((type) => {
+                                                return <VerifingData verifClicked={verifClick} thirdParty={thirdParty} studentId={studentId} contract={contract} key={type} dataType={type} accesses={dataAccesses} setAccesses={(val) => setDataAccesses(val)}/>
+                                            })
+                                        }
                                     </div>
                                     <br />
-                                    <div style={{display:'flex', justifyContent:'center'}} ><SimpleButton text="Modify accessability" /></div>
+                                    <div style={{display:'flex', justifyContent:'center'}} ><SimpleButton onClick={updateDataAccesses} text="Modify accessability" /></div>
                                 </div>
                             </div>
                         </div>

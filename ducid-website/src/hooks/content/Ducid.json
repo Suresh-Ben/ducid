@@ -116,6 +116,28 @@
                     "type": "address"
                 },
                 {
+                    "internalType": "string[]",
+                    "name": "dataType",
+                    "type": "string[]"
+                },
+                {
+                    "internalType": "bool[]",
+                    "name": "accesses",
+                    "type": "bool[]"
+                }
+            ],
+            "name": "changeThirdPartyAccess",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [{
+                    "internalType": "address",
+                    "name": "thirdParty",
+                    "type": "address"
+                },
+                {
                     "internalType": "string",
                     "name": "studentId",
                     "type": "string"
@@ -241,21 +263,6 @@
                 "internalType": "string",
                 "name": "",
                 "type": "string"
-            }],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [{
-                "internalType": "string",
-                "name": "collegeId",
-                "type": "string"
-            }],
-            "name": "getCollegeDataTypes",
-            "outputs": [{
-                "internalType": "string[]",
-                "name": "",
-                "type": "string[]"
             }],
             "stateMutability": "view",
             "type": "function"
@@ -440,45 +447,11 @@
         },
         {
             "inputs": [{
-                    "internalType": "address",
-                    "name": "thirdParty",
-                    "type": "address"
-                },
-                {
-                    "internalType": "string",
-                    "name": "dataType",
-                    "type": "string"
-                }
-            ],
-            "name": "giveAccessToThirdParty",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [{
                 "internalType": "string",
                 "name": "collegeId",
                 "type": "string"
             }],
             "name": "rejectCollege",
-            "outputs": [],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        },
-        {
-            "inputs": [{
-                    "internalType": "address",
-                    "name": "thirdParty",
-                    "type": "address"
-                },
-                {
-                    "internalType": "string",
-                    "name": "dataType",
-                    "type": "string"
-                }
-            ],
-            "name": "revokeAccessToThirdParty",
             "outputs": [],
             "stateMutability": "nonpayable",
             "type": "function"

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch, useParams} from 'react-router-dom';
 
 import './App.css';
 import About from './pages/About';
@@ -32,12 +32,18 @@ function App() {
         <Route exact path = "/auth">
           <Auth/>
         </Route>
+        <Route path = "/api/isStudent/:id" element={<IsStudent />} />
         <Route>
           <NotFound/>
         </Route>
       </Switch>
     </Router>
   );
+}
+
+function IsStudent() {
+  const params = useParams();
+  console.log(params);
 }
 
 export default App;

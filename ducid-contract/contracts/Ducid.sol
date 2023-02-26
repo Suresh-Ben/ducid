@@ -228,13 +228,13 @@ contract Ducid {
     }
 
     //student - thirdparty functions
-    function giveAccessToThirdParty(address thirdParty, string calldata dataType) external studentOnly {
+    function changeThirdPartyAccess(address thirdParty, string[] calldata dataType, bool[] calldata accesses) external studentOnly {
+        if(dataType.length != accesses.length) revert DataMissMatching();
         string memory studentId = students[msg.sender];
-        thirdPartyAccess[thirdParty][studentId][dataType] = true;
-    }
-    function revokeAccessToThirdParty(address thirdParty, string calldata dataType) external studentOnly {
-        string memory studentId = students[msg.sender];
-        thirdPartyAccess[thirdParty][studentId][dataType] = false;
+        for(uint i =0; i < dataType.length; i++)
+        {
+            thirdPartyAccess[thirdParty][studentId][dataType[i]] = accesses[i];
+        }
     }
     function checkAccessToThirdParty(address thirdParty, string calldata studentId, string calldata dataType) view external returns(bool) {
         return thirdPartyAccess[thirdParty][studentId][dataType];
@@ -268,7 +268,7 @@ contract Ducid {
     function getCollegeData(string calldata collegeId, string calldata dataType) view external returns(string memory) {  return collegeData[collegeId][dataType];  }
     function getStudentData(string calldata studentId, string calldata dataType) view external returns(string memory) {
         if(studentVerificationStatus[studentId] == StudentStatus.ESS_notfound) revert StudentNotFound();
-        if(keccak256(abi.encodePacked(students[msg.sender])) == keccak256(abi.encodePacked(studentId)) || !thirdPartyAccess[msg.sender][studentId][dataType]) revert NoAccessToEditData();
+        if(keccak256(abi.encodePacked(students[msg.sender])) != keccak256(abi.encodePacked(studentId)) && !thirdPartyAccess[msg.sender][studentId][dataType]) revert NoAccessToEditData();
 
         return studentData[studentId][dataType];
     }

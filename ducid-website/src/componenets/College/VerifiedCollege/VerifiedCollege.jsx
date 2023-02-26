@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import './VerifiedCollege.css';
 import useContract from '../../../hooks/useContract';
@@ -15,6 +15,7 @@ function VerifiedCollege(props) {
     const { address, contract, connectionError } = useContract();
     const [popup, setPopup] = useState(false);
     const [updatePopup, setupdatePopup] = useState(false);
+    const [ studentsList, setStudentsList ] = useState([]);
 
     function togglePopup() {
         setPopup(!popup);
@@ -22,6 +23,17 @@ function VerifiedCollege(props) {
     function updateTogglePopup() {
         setupdatePopup(!updatePopup);
     }
+
+    async function loadAllStudents() {
+        if(!contract) return;
+
+        let tempStudentsList = await contract.getCollegeStudentIds();
+        setStudentsList(tempStudentsList);
+    }
+
+    useEffect(() => {
+        loadAllStudents();
+    }, [contract, address, studentsList]);
 
     return (
         <div>
@@ -35,29 +47,20 @@ function VerifiedCollege(props) {
                         <AddStudent contract={contract} togglePopup={togglePopup} visibility={popup} />
                 </div>
                 <div style={{display:"flex", justifyContent:'center'}}>
-                    <table  className="verified-college-table">
+                    <table style={{width:'75%'}} className="verified-college-table">
                         <thead className="verified-college-row">
                             <tr>
                             <th>Student Name</th>
                             <th>ducid</th>
-                            <th>Verification Status</th>
+                            <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Student1</td>
-                                <td>ducid</td>
-                                <td>&#9989;</td>
-                                <td>
-                                    <button onClick={updateTogglePopup} text={"Update Details"}></button>
-                                    <UpdateStudent updateTogglePopup={updateTogglePopup} visibility={updatePopup} />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Student2</td>
-                                <td>ducid</td>
-                                <td>&#x1F7E0;</td>
-                            </tr>
+                            {
+                                studentsList.map((studentId) => {
+                                    return <StudentRow key={studentId} contract={contract} updatePopup={updatePopup} updateTogglePopup={updateTogglePopup} studentId={studentId} />
+                                })
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -66,6 +69,33 @@ function VerifiedCollege(props) {
 
         </div>
     )
+}
+
+function StudentRow(props) {
+
+    const [studentName, setStudentName] = useState("");
+
+    async function loadStudent() {
+        let tempName = await props.contract.getStudentDataAsCollege(props.studentId, "Student Name", true);
+        setStudentName(tempName);
+    }
+
+    useEffect(()=> {
+        setTimeout(()=>{
+            loadStudent();
+        }, 1000);
+    },[props.contract, studentName]);
+
+    return (
+        <tr>
+            <td>{studentName}</td>
+            <td>{props.studentId}</td>
+            <td>
+                <button onClick={props.updateTogglePopup} text={"Update Details"}>update student data</button>
+                <UpdateStudent updateTogglePopup={props.updateTogglePopup} visibility={props.updatePopup} />
+            </td>
+        </tr>
+    );
 }
 
 export default VerifiedCollege;
